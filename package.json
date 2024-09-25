@@ -15,5 +15,8 @@
     "url": "https://github.com/prasad-thirtha/javaScript_Practice/issues"
   },
   "homepage": "https://github.com/prasad-thirtha/javaScript_Practice#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "cypress": "^13.14.2"
+  }
 }
