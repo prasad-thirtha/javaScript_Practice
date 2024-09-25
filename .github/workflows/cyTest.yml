@@ -20,11 +20,21 @@ jobs:
         needs: [init]
         runs-on: ubuntu-latest
         steps:
+            - name: Install node
+              uses: actions/setup-node@v4
+            - uses: bissolli/gh-action-persist-workspace@v2
+              with:
+                action: retrieve
             - name: Run First Test
               run: npm run test1
     test2:
         needs: [init]
         runs-on: ubuntu-latest
         steps:
+            - name: Install node
+              uses: actions/setup-node@v4
+            - uses: bissolli/gh-action-persist-workspace@v2
+              with:
+                action: retrieve
             - name: Run Second Test
               run: npm run test2         
