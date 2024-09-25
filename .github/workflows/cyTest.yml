@@ -38,4 +38,3 @@ jobs:
                 start: npm run
                 browser: chrome
                 spec: ${{ matrix.spec_folders }}
-                headless: true
