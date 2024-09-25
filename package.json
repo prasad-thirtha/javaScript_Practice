@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress run --browser chrome"
+    "test1": "npx cypress run --browser chrome --spec 'cypress/specs/myTest.spec.js'",
+    "test2": "npx cypress run --browser chrome --spec 'cypress/specs/test.spec.js'"
   },
   "repository": {
     "type": "git",
