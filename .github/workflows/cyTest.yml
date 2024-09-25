@@ -12,14 +12,7 @@ jobs:
               with:
                 node-version: '22'
             - name: Install Deps
-              run: npm ci
-            - name: Cache Cypress Binary
-              uses: actions/cache@v3  # Cache the Cypress binary
-              with:
-                path: /home/runner/.cache/Cypress
-                key: ${{ runner.os }}-cypress-${{ hashFiles('package-lock.json') }}
-                restore-keys: |
-                    ${{ runner.os }}-cypress-           
+              run: npm ci         
             - uses: bissolli/gh-action-persist-workspace@v2
               with:
                 action: persist
@@ -34,8 +27,11 @@ jobs:
             - uses: bissolli/gh-action-persist-workspace@v2
               with:
                 action: retrieve
-            - name: Run First Test
-              run: npm run test1
+            - name: Cypress run Test1
+              uses: cypress-io/github-action@v6
+              with:
+                spec: cypress/specs/myTest.spec.js
+              
     test2:
         needs: [init]
         runs-on: ubuntu-latest
@@ -47,5 +43,7 @@ jobs:
             - uses: bissolli/gh-action-persist-workspace@v2
               with:
                 action: retrieve
-            - name: Run Second Test
-              run: npm run test2         
+            - name: Cypress run
+              uses: cypress-io/github-action@v6
+              with:
+                spec: cypress/specs/test.spec.js  
