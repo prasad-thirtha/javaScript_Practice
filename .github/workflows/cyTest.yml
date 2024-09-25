@@ -16,17 +16,10 @@ jobs:
             - name: Cache Cypress Binary
               uses: actions/cache@v3  # Cache the Cypress binary
               with:
-                path: ~/.cache/Cypress
+                path: /home/runner/.cache/Cypress
                 key: ${{ runner.os }}-cypress-${{ hashFiles('package-lock.json') }}
                 restore-keys: |
-                    ${{ runner.os }}-cypress-
-            - name: Cache node_modules
-              uses: actions/cache@v3  # Cache node_modules to avoid reinstalling packages
-              with:
-                path: node_modules
-                key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-                restore-keys: |
-                    ${{ runner.os }}-node_modules-            
+                    ${{ runner.os }}-cypress-           
             - uses: bissolli/gh-action-persist-workspace@v2
               with:
                 action: persist
