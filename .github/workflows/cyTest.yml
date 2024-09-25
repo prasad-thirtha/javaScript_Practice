@@ -1,10 +1,17 @@
 name: Cypress Test Runs
-on: workflow_dispatch
-jobs: 
-  first_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Greeting
-        run: echo "Welcome to Cypress Test"
-      - name: Print Bye
-        run: echo "Bye.. Bye..."
+on: push
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get Code
+              uses: actions/checkout@v4
+            - name: Install node
+              uses: actions/setup-node@v4  
+              with:
+                node-version: '22'
+            - name: Install Deps
+              run: npm ci
+            - name: Run Tests
+              run: npm run test      
