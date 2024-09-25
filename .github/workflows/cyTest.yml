@@ -2,7 +2,7 @@ name: Cypress Test Runs
 on: push
 
 jobs:
-    test1:
+    init:
         runs-on: ubuntu-latest
         steps:
             - name: Get Code
@@ -13,18 +13,18 @@ jobs:
                 node-version: '22'
             - name: Install Deps
               run: npm ci
-            - name: Run Tests
+            - uses: bissolli/gh-action-persist-workspace@v2
+              with:
+                action: persist
+    test1:
+        needs: [init]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Run First Test
               run: npm run test1
     test2:
+        needs: [init]
         runs-on: ubuntu-latest
         steps:
-            - name: Get Code
-              uses: actions/checkout@v4
-            - name: Install node
-              uses: actions/setup-node@v4  
-              with:
-                node-version: '22'
-            - name: Install Deps
-              run: npm ci
-            - name: Run Tests
+            - name: Run Second Test
               run: npm run test2         
