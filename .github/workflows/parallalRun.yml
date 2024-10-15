@@ -1,0 +1,61 @@
+name: Cypress Domain/Module Parallel Tests
+
+on: push
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          # Domain 1 with its modules
+          - domain: domain-1
+            module: module-1
+          - domain: domain-1
+            module: module-2
+          # Domain 2 with its modules
+          - domain: domain-2
+            module: module-3
+          - domain: domain-2
+            module: module-4
+          - domain: domain-2
+            module: module-5
+          # Domain 3 with its modules
+          - domain: domain-3
+            module: module-6
+          - domain: domain-3
+            module: module-7
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cypress Run in Parallel
+        uses: cypress-io/github-action@v4
+        with:
+        #   record: true
+        #   key: ${{ secrets.CYPRESS_RECORD_KEY }}
+        #   parallel: true
+          group: ${{ matrix.domain }}-${{ matrix.module }}
+          spec: cypress/integration/specs/${{ matrix.domain }}/${{ matrix.module }}/**/*.spec.js
+
+      - name: Upload Cypress videos
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos-${{ matrix.domain }}-${{ matrix.module }}
+          path: cypress/videos/**
+
+      - name: Upload Cypress screenshots
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots-${{ matrix.domain }}-${{ matrix.module }}
+          path: cypress/screenshots/**
