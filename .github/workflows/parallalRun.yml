@@ -43,7 +43,7 @@ jobs:
         #   record: true
         #   key: ${{ secrets.CYPRESS_RECORD_KEY }}
         #   parallel: true
-          group: ${{ matrix.domain }}-${{ matrix.module }}
+        #   group: ${{ matrix.domain }}-${{ matrix.module }}
           spec: cypress/specs/${{ matrix.domain }}/${{ matrix.module }}/**/*.spec.js
 
       - name: Upload Cypress videos
