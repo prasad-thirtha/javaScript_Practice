@@ -40,10 +40,10 @@ jobs:
       - name: Cypress Run in Parallel
         uses: cypress-io/github-action@v4
         with:
-        #   record: true
-        #   key: ${{ secrets.CYPRESS_RECORD_KEY }}
-        #   parallel: true
-        #   group: ${{ matrix.domain }}-${{ matrix.module }}
+          record: true
+          key: ${{ secrets.CYPRESS_RECORD_KEY }}
+          parallel: true
+          group: ${{ matrix.domain }}-${{ matrix.module }}
           spec: cypress/specs/${{ matrix.domain }}/${{ matrix.module }}/**/*.spec.js
 
       - name: Upload Cypress videos
