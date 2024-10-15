@@ -44,7 +44,7 @@ jobs:
         #   key: ${{ secrets.CYPRESS_RECORD_KEY }}
         #   parallel: true
           group: ${{ matrix.domain }}-${{ matrix.module }}
-          spec: cypress/integration/specs/${{ matrix.domain }}/${{ matrix.module }}/**/*.spec.js
+          spec: cypress/specs/${{ matrix.domain }}/${{ matrix.module }}/**/*.spec.js
 
       - name: Upload Cypress videos
         if: always()
