@@ -41,11 +41,13 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           record: true
-          key: ${{ secrets.CYPRESS_RECORD_KEY }}
           parallel: true
           group: ${{ matrix.domain }}-${{ matrix.module }}
           spec: cypress/specs/${{ matrix.domain }}/${{ matrix.module }}/**/*.spec.js
-
+        env:  
+            # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
+            # in GitHub repo → Settings → Secrets → Actions
+            CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  
       - name: Upload Cypress videos
         if: always()
         uses: actions/upload-artifact@v3
